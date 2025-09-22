@@ -2,12 +2,16 @@ from fastapi import APIRouter, status
 
 from app.schemas.auth_schemas import RegisterRequest,LoginRequest,UserResponse,TokenResponse
 from app.services.auth_service import AuthService
+import logging
+logging.basicConfig(level=logging.INFO)
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
 auth_service = AuthService()
 
 @router.post("/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
+
 def register_user(payload: RegisterRequest):
+    logging.info(f"Registering user: {payload.username}, Email: {payload.email}")
     return auth_service.register_user(payload.username, payload.email, payload.password)
 
 @router.post("/login", response_model=TokenResponse, status_code=status.HTTP_200_OK)

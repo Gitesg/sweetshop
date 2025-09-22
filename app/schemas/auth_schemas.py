@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr
-
+from typing import Optional
 
 class RegisterRequest(BaseModel):
     username: str
@@ -10,14 +10,10 @@ class LoginRequest(BaseModel):
     username: str
     password: str
 
-
 class UserResponse(BaseModel):
-    id: int
+    id: str                
     username: str
     email: EmailStr
-
-    class Config:
-        orm_mode = True
 
 class TokenResponse(BaseModel):
     access_token: str

@@ -1,9 +1,18 @@
 from fastapi import FastAPI
+
 from app.routes import auth_routes, sweet_routes, inventory_routes
+
 
 app = FastAPI()
 
 app.include_router(auth_routes.router)
+app.include_router(inventory_routes.router)
+app.include_router(sweet_routes.router)
+
+
+
+
+
 
 
 if __name__ == "__main__":
